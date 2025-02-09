@@ -1,0 +1,15 @@
+services:
+  code:
+    entrypoint:
+      - sleep
+      - infinity
+    image: huggingface/transformers-pytorch-gpu
+    volumes:
+      - .:/com.docker.devenvironments.code
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
