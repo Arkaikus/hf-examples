@@ -13,3 +13,9 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  tts:
+    build:
+      context: ./tts/app
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: streamlit run app.py
