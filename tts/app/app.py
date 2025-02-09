@@ -4,6 +4,7 @@ from transformers.pipelines import TextToAudioPipeline
 import soundfile as sf
 from scipy.signal import butter, lfilter
 import io
+import random, string
 
 
 # Define a low-pass filter for smoother and calmer audio
@@ -51,3 +52,8 @@ if st.button("Generate Audio"):
         print("Sending audio to streamlit")
         # Display audio player
         st.audio(audio_buffer, format="audio/wav")
+
+        random_name = "".join(random.choices(string.ascii_letters + string.digits, k=5)) + ".wav"
+        with open(random_name, "wb") as f:
+            f.write(audio_buffer.getvalue())
+        st.success(f"Audio saved as {random_name}")
